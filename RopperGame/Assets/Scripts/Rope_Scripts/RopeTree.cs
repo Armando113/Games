@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RopeTree : TreeComposite {
+public class RopeTree : TreeComposite
+{
 
 	public RopeTree():base(GameObjectType.ROPE)
 	{

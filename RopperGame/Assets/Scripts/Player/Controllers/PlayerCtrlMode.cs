@@ -1,15 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerCtrlMode : MonoBehaviour {
+public abstract class PlayerCtrlMode
+{
 
-	// Use this for initialization
-	void Start () {
+    //Type of Controller
+    protected CtrlType mCtrlType;
+
+    public PlayerCtrlMode(CtrlType _mCtrlType)
+    {
+        mCtrlType = _mCtrlType;
+    }
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public CtrlType GetCtrlType()
+    {
+        return mCtrlType;
+    }
+
+    //Virtual Functions
+    public virtual void Activate()
+    {
+
+    }
+
+    public virtual void Terminate()
+    {
+
+    }
+
+    //Abstract functions that MUST be implemented in the code
+    /// <summary>
+    /// Our behaviours when a tap is registered
+    /// </summary>
+    /// <param name="_keyCode"></param>
+    public abstract void OnTap(KeyCode _keyCode);
+
+    public abstract void OnTap(Touch _touch);
 }

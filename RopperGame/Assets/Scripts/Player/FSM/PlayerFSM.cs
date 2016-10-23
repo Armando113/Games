@@ -7,9 +7,10 @@ public class PlayerFSM : FSM
 
     private LLRopeLane llLane;
     private RRRopeLane rrLane;
-   //private LRRopeLane lrLane;
-    //private RLRopeLane rlLane;
 
+    //Our controllers
+    private PlayerCtrlMode mCurrCtrl;
+    private GameCtrl mGameCtrl;
 
     public RopperGuy climber;
 
@@ -17,20 +18,11 @@ public class PlayerFSM : FSM
     {
         llLane = new LLRopeLane();
         rrLane = new RRRopeLane();
-       
-       // lrLane = new LRRopeLane();
-       // rlLane = new RLRopeLane();
 
         //Add the neighbours
         //Add for LL
         llLane.SetLeftLane(null);
         llLane.SetRightLane(rrLane);
-        //Add for LR
-        //lrLane.SetLeftLane(llLane);
-        //lrLane.SetRightLane(rlLane);
-        //Add for RL
-        //rlLane.SetLeftLane(lrLane);
-       // rlLane.SetRightLane(rrLane);
         //Add for RR
         rrLane.SetLeftLane(llLane);
         rrLane.SetRightLane(null);
@@ -48,6 +40,16 @@ public class PlayerFSM : FSM
             pInstance = new PlayerFSM();
         }
         return pInstance;
+    }
+
+    //The types of commands the player can give
+    public static void OnTap(KeyCode _keyCode)
+    {
+        GetInstance().mCurrCtrl.OnTap(_keyCode);
+    }
+    public static void OnTap(Touch _touch)
+    {
+        GetInstance().mCurrCtrl.OnTap(_touch);
     }
 
     public static void MoveToRight()
@@ -86,57 +88,6 @@ public class PlayerFSM : FSM
         }
     }
 
-    public static void PowerJumpRight()
-    {
-        RopeLane currentLane = (RopeLane)GetInstance().currentState;
-
-        if(currentLane == GetInstance().llLane)
-        {
-            while (currentLane.GetRightLane() != null)
-            {
-                //Move to the right
-                currentLane = currentLane.GetRightLane();
-            }
-
-            GetInstance().ChangeState(currentLane);
-
-            GetInstance().currentState.Execute(GetInstance().climber);
-
-            //Drain energy as penalty
-            GetInstance().climber.DrainEnergy(GameRules.GetHighEnergy());
-        }
-        else
-        {
-            MoveToRight();
-        }
-    }
-
-    public static void PowerJumpLeft()
-    {
-        RopeLane currentLane = (RopeLane)GetInstance().currentState;
-
-        if (currentLane == GetInstance().rrLane)
-        {
-            while (currentLane.GetLeftLane() != null)
-            {
-                //Move to the right
-                currentLane = currentLane.GetLeftLane();
-            }
-
-            GetInstance().ChangeState(currentLane);
-
-            GetInstance().currentState.Execute(GetInstance().climber);
-
-            //Drain energy as penalty
-            GetInstance().climber.DrainEnergy(GameRules.GetHighEnergy());
-
-        }
-        else
-        {
-            MoveToLeft();
-        }
-    }
-
     public static void SetRopper(RopperGuy _climber)
     {
         GetInstance().climber = _climber;
@@ -155,8 +106,6 @@ public class PlayerFSM : FSM
         RopperTree tTree = (RopperTree)GameObjectManager.GetTree(GameObjectType.PLAYER);
 
         SetRopper(tTree.GetRopperGuy());
-
-
 
         //Reposition the ropper guy
         if (GetInstance().climber != null)

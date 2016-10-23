@@ -16,8 +16,6 @@ public class RopperGuy : TreeLeaf
     public RopperGuy() : base(GameObjectType.PLAYER)
     {
         threshold = 0.1f;
-
-       
     }
 
     // Use this for initialization

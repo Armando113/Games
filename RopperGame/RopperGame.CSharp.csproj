@@ -107,6 +107,8 @@
     <Compile Include="Assets\Scripts\Managers\ObjectIterator.cs" />
     <Compile Include="Assets\Scripts\PlayScreen.cs" />
     <Compile Include="Assets\Scripts\Player\Anim\RopperAnimator.cs" />
+    <Compile Include="Assets\Scripts\Player\Controllers\CtrlType.cs" />
+    <Compile Include="Assets\Scripts\Player\Controllers\GameCtrl.cs" />
     <Compile Include="Assets\Scripts\Player\Controllers\PlayerCtrlMode.cs" />
     <Compile Include="Assets\Scripts\Player\Energy\RopperEnergy.cs" />
     <Compile Include="Assets\Scripts\Player\FSM\CenterRopeLane.cs" />
