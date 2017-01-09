@@ -186,20 +186,23 @@ abstract public class TreeComposite : TreeComponent
 
     public override void ReturnObject(TreeComponent _object)
     {
-        //Check if we have this object
-        if(_object == FindActive(_object))
+        if(_object != null)
         {
-            //Deactivate the object
-            _object.gameObject.SetActive(false);
+            //Check if we have this object
+            if (_object == FindActive(_object))
+            {
+                //Deactivate the object
+                _object.gameObject.SetActive(false);
 
-            //Return to zero position
-            _object.transform.position = Vector3.zero;
+                //Return to zero position
+                _object.transform.position = Vector3.zero;
 
-            //Remove from active
-            RemoveActive(_object);
+                //Remove from active
+                RemoveActive(_object);
 
-            //Add to reserve
-            AddReserveChild(_object);
+                //Add to reserve
+                AddReserveChild(_object);
+            }
         }
     }
 }

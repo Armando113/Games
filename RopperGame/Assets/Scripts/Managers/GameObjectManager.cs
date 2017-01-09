@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class GameObjectManager : Manager
 {
 	//Static Instance.
@@ -21,13 +22,23 @@ public class GameObjectManager : Manager
 		tObj = (GameObject)MonoBehaviour.Instantiate (Resources.Load ("Prefabs/Ropper/RopperNode"), new Vector3 (), new Quaternion ());
 		tNode = tObj.GetComponent<ManagerNode> ();
 		AddActive (tNode);
+       
 
 		//The ropes node
 		tObj = (GameObject)MonoBehaviour.Instantiate (Resources.Load ("Prefabs/RopeBuilder/RopeNode"), new Vector3 (), new Quaternion ());
 		tNode = tObj.GetComponent<ManagerNode> ();
 		AddActive (tNode);
 
-	}
+        //The coins node
+        tObj = (GameObject)MonoBehaviour.Instantiate(Resources.Load("Prefabs/Collectibles/CoinNode"), new Vector3(), new Quaternion());
+        tNode = tObj.GetComponent<ManagerNode>();
+        AddActive(tNode);
+
+        //The Bird node
+        tObj = (GameObject)MonoBehaviour.Instantiate(Resources.Load("Prefabs/Obstacle/BirdNode"), new Vector3(), new Quaternion());
+        tNode = tObj.GetComponent<ManagerNode>();
+        AddActive(tNode);
+    }
 
 	private static GameObjectManager GetInstance()
 	{
@@ -84,5 +95,10 @@ public class GameObjectManager : Manager
 			GetInstance().pIterator.GoNext();
 		}
 	}
+    void Update()
+    {
+        //Update the EventManager
+        EventManager.Tick(Time.deltaTime);
+    }
 
 }

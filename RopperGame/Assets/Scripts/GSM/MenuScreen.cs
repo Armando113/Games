@@ -17,6 +17,8 @@ public class MenuScreen : ScreenState
         //Start (or activate) all assets in the main menu
         //UI
         UIManager.SwitchToMenu();
+
+        PlayerFSM.SetMenuCtrl();
     }
 
     public override void Execute()

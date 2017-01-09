@@ -55,6 +55,7 @@ public class SettingsScreen_Buttons : MonoBehaviour {
 
 
 
+
 	void Start () {
 		FondoBlanco.CrossFadeAlpha(0,0.2f, false);
 	}

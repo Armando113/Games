@@ -26,13 +26,20 @@ public class LLRopeLane : RopeLane
         {
             guy.GetComponentInChildren<Animator>().Play(null);
             guy.GetComponentInChildren<Animator>().Play("Left");
+            if (FloorManager.GetLeftCoinOnFloor(5) == true)
+            {
+                PlayerPrefs.SetInt("Coins", (PlayerPrefs.GetInt("Coins") + 1));
+            }
         }
         //Check for the left lane ONLY
         if (FloorManager.GetLeftRopeOnFloor(5) == RopeEnum.WEAK)
         {
             guy.GetComponentInChildren<Animator>().Play("Falling");
+            guy.SetFallen(true);
             EventManager.AddEvent(new GameOverCommand(), 0.3f);
         }
+        
+
     }
 
     public override void Exit(TreeLeaf _object)

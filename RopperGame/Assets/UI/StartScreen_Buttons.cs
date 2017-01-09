@@ -9,7 +9,8 @@ public class StartScreen_Buttons : MonoBehaviour {
 	public Button Store_B;
 	public Button Challenges_B;
 	public Button Play_B;
-	public Image ChallengesDialog_B;
+    public Button Home_B;
+    public Image ChallengesDialog_B;
 
 	public GameObject NoAds_G;
 	public GameObject Store_G;
@@ -31,6 +32,7 @@ public class StartScreen_Buttons : MonoBehaviour {
 	bool PlayIsPressed = false;
 	bool SettingsIsPressed = false;
 	bool CreditsIsPressed = false;
+    bool HomeIsPressed = false;
 	//---------------------------------
 
 	//Movimiento del Fondo--------------------
@@ -40,6 +42,7 @@ public class StartScreen_Buttons : MonoBehaviour {
 	public RawImage FondoCielo;
 	float scrollSpeed2 = 0.005f;
 	//---------------------------------------
+
 
 	void Start () {
 		FondoBlanco.CrossFadeAlpha (0, 0.3f, false);
@@ -88,9 +91,18 @@ public class StartScreen_Buttons : MonoBehaviour {
 				SceneManager.LoadScene("Credits");
 			}
 		}//------------------------------------------------------	
-
-		//Movimiento del Fondo------------------------------------------------------------------------------------------------
-		float offset = Time.time * scrollSpeed;
+        if (HomeIsPressed == true)
+        {
+            timer += Time.deltaTime;
+            FondoBlanco.CrossFadeAlpha(1, 0.1f, false);
+            if (timer > 0.2f)
+            {
+                timer = 0.0f;
+                SceneManager.LoadScene("StartMenu");
+            }
+        }
+        //Movimiento del Fondo------------------------------------------------------------------------------------------------
+        float offset = Time.time * scrollSpeed;
 		FondoEdificio.GetComponent<RawImage> ().uvRect = new Rect ((new Vector2 (0.0f, offset)), new Vector2 (1.0f, 0.3f));
 
 		float offset2 = Time.time * scrollSpeed2;
@@ -110,14 +122,6 @@ public class StartScreen_Buttons : MonoBehaviour {
 	}
 
 	public void Challenges(){
-		/*if (ChallengeisPressed) {
-			ChallengesDialog_G.GetComponent<Animation> ().Play("ChallengeDialog_Exit");
-			ChallengeisPressed = false;
-		} else {
-			ChallengesDialog_G.GetComponent<Animation> ().Play("ChallengeDialog_Enter");
-			ChallengeisPressed = true;
-		}*/
-
 		ChallengesAll.SetActive (true);
 			
 	}
@@ -137,4 +141,8 @@ public class StartScreen_Buttons : MonoBehaviour {
 	public void BackChallenge(){
 		ChallengesAll.SetActive (false);
 	}
+    public void Home()
+    {
+        HomeIsPressed = true;
+    }
 }

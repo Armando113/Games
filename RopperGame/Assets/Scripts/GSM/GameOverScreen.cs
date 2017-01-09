@@ -17,12 +17,12 @@ public class GameOverScreen : ScreenState
         UIManager.SwitchToGameOver();
 		EventManager.AddEvent(energyRefill, 0.0f);
 
-        ScoreManager.ShowScores();
+        PlayerFSM.SetGameOverCtrl();
     }
 
     public override void Execute()
     {
-        
+        ScoreManager.ShowScores();
     }
 
     public override void Exit()

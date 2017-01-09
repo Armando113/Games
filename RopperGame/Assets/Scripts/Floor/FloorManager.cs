@@ -48,6 +48,7 @@ public class FloorManager
         }
     }
 
+    //Called when we exit the Game Mode
     public static void DeleteFloors()
     {
         if(GetInstance().isCreated)
@@ -126,5 +127,16 @@ public class FloorManager
     {
         return GetInstance().myFloors[_floor].GetLeftRope().GetRopeType();
     }
-	
+    //This function returns the coins on the right side
+    public static bool GetRightCoinOnFloor(int _floor)
+    {
+        return GetInstance().myFloors[_floor].CollectRightCoin();
+    }
+
+    //This function returns the Coins on the left side
+    public static bool GetLeftCoinOnFloor(int _floor)
+    {
+        return GetInstance().myFloors[_floor].CollectLeftCoin();
+    }
+
 }

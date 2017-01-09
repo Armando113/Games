@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class CanvasController : MonoBehaviour
@@ -19,6 +20,7 @@ public class CanvasController : MonoBehaviour
     public void SwitchToMenu()
     {
         GameStateMachine.EnterMenuScreen();
+
     }
 
 	public void SwitchToIntro()

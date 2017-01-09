@@ -5,32 +5,21 @@ public class PlayerFSM : FSM
 {
     private static PlayerFSM pInstance;
 
-    private LLRopeLane llLane;
-    private RRRopeLane rrLane;
-
     //Our controllers
     private PlayerCtrlMode mCurrCtrl;
+    private MenuCtrl mMenuCtrl;
     private GameCtrl mGameCtrl;
-
-    public RopperGuy climber;
+    private GameOverCtrl mGameOverCtrl;
 
     private PlayerFSM() : base(null)
     {
-        llLane = new LLRopeLane();
-        rrLane = new RRRopeLane();
 
-        //Add the neighbours
-        //Add for LL
-        llLane.SetLeftLane(null);
-        llLane.SetRightLane(rrLane);
-        //Add for RR
-        rrLane.SetLeftLane(llLane);
-        rrLane.SetRightLane(null);
+        mMenuCtrl = new MenuCtrl();
+        mGameCtrl = new GameCtrl();
+        mGameOverCtrl = new GameOverCtrl();
 
-
-        //Set the new current state
-        currentState = rrLane;
-
+        mCurrCtrl = mMenuCtrl;
+        mGameCtrl.Activate();
     }
 
     private static PlayerFSM GetInstance()
@@ -52,75 +41,36 @@ public class PlayerFSM : FSM
         GetInstance().mCurrCtrl.OnTap(_touch);
     }
 
-    public static void MoveToRight()
+    public static void SetMenuCtrl()
     {
-        //Get the next node
-        RopeLane currentLane = (RopeLane)GetInstance().currentState;
+        GetInstance().SwitchCtrls(GetInstance().mMenuCtrl);
+    }
 
-        if(currentLane.GetRightLane() != null)
-        {
-            GetInstance().ChangeState(currentLane.GetRightLane());
+    public static void SetGameCtrl()
+    {
+        GetInstance().SwitchCtrls(GetInstance().mGameCtrl);
+    }
 
-            //Execute the state
-            GetInstance().currentState.Execute(GetInstance().climber);
-        }
-        else
+    public static void SetGameOverCtrl()
+    {
+        GetInstance().SwitchCtrls(GetInstance().mGameOverCtrl);
+    }
+
+    private void SwitchCtrls(PlayerCtrlMode _newCtrl)
+    {
+        if(_newCtrl != null)
         {
-            GetInstance().currentState.Execute(GetInstance().climber);
+            GetInstance().mCurrCtrl.Terminate();
+
+            GetInstance().mCurrCtrl = _newCtrl;
+
+            GetInstance().mCurrCtrl.Activate();
         }
     }
 
-    public static void MoveToLeft()
+    public static PlayerCtrlMode GetCurrentCtrlMode()
     {
-        //Get the next node
-        RopeLane currentLane = (RopeLane)GetInstance().currentState;
-
-        if (currentLane.GetLeftLane() != null)
-        {
-            GetInstance().ChangeState(currentLane.GetLeftLane());
-
-            //Execute the state
-            GetInstance().currentState.Execute(GetInstance().climber);
-        }
-        else
-        {
-            GetInstance().currentState.Execute(GetInstance().climber);
-        }
-    }
-
-    public static void SetRopper(RopperGuy _climber)
-    {
-        GetInstance().climber = _climber;
-    }
-
-    public static void DrainEnergy(float _energy)
-    {
-        GetInstance().climber.DrainEnergy(_energy);
-
-    }
-
-    public static void ResetRopper()
-    {
-        GetInstance().currentState = GetInstance().rrLane;
-
-        RopperTree tTree = (RopperTree)GameObjectManager.GetTree(GameObjectType.PLAYER);
-
-        SetRopper(tTree.GetRopperGuy());
-
-        //Reposition the ropper guy
-        if (GetInstance().climber != null)
-        {
-            GetInstance().climber.ForceNewPosition(Vector3.zero);
-            GetInstance().climber.gameObject.SetActive(true);
-        }
-    }
-
-    public static void DeactivateRopper()
-    {
-        if (GetInstance().climber != null)
-        {
-            GetInstance().climber.gameObject.SetActive(false);
-        }
+        return GetInstance().mCurrCtrl;
     }
 
 }

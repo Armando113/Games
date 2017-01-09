@@ -20,7 +20,12 @@ public class RRRopeLane : RopeLane
         {
             guy.GetComponentInChildren<Animator>().Play(null);
             guy.GetComponentInChildren<Animator>().Play("Right");
-          
+
+            if (FloorManager.GetRightCoinOnFloor(5) == true)
+            {
+                PlayerPrefs.SetInt("Coins", (PlayerPrefs.GetInt("Coins") + 1));
+            }
+
         }
 
         if (guy.transform.position != (new Vector3(0.55f, 0.0f, 0.0f)))
@@ -35,8 +40,10 @@ public class RRRopeLane : RopeLane
         if (FloorManager.GetRightRopeOnFloor(5) == RopeEnum.WEAK)
         {
             guy.GetComponentInChildren<Animator>().Play("Falling");
+            guy.SetFallen(true);
             EventManager.AddEvent(new GameOverCommand(), 0.3f);
         }
+        
     }
 
     public override void Exit(TreeLeaf _object)

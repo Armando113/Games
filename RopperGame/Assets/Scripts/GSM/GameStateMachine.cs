@@ -65,6 +65,11 @@ public class GameStateMachine
         }
     }
 
+    public static void Execute()
+    {
+        GetInstance().currentScreen.Execute();
+    }
+
 	public static void EnterMenuScreen()
     {
         GetInstance().canPlay = false;

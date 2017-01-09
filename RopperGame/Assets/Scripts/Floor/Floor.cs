@@ -12,6 +12,11 @@ public class Floor
 
     protected Rope rightRope;
 
+    protected Coins rightCoin;
+
+    protected Coins leftCoin;
+
+
     //When the time comes, items will be here too
     public Floor()
     {
@@ -31,6 +36,36 @@ public class Floor
     public Rope GetRightRope()
     {
         return rightRope;
+    }
+
+    public bool CollectRightCoin()
+    {
+        if (rightCoin != null)
+        {
+            //Return the coin
+            CoinFactory.ReturnCoin(rightCoin);
+            //Make it null
+            rightCoin = null;
+            //Return success
+            return true;
+        }
+        //No coin :'(
+        return false;
+    }
+
+    public bool CollectLeftCoin()
+    {
+        if(leftCoin != null)
+        {
+            //Return the coin
+            CoinFactory.ReturnCoin(leftCoin);
+            //Make it null
+            leftCoin = null;
+            //Return success
+            return true;
+        }
+        //No coin :'(
+        return false;
     }
 
     public void GetNewAssets(int _index)
@@ -62,6 +97,16 @@ public class Floor
         //Delete the Right rope
         RopeFactory.ReturnRope(this.rightRope);
         this.rightRope = null;
+
+        //Delete the left coin
+        CoinFactory.ReturnCoin(this.leftCoin);
+        this.leftCoin = null;
+
+        //Delete the Right coin
+        CoinFactory.ReturnCoin(this.rightCoin);
+        this.rightCoin = null;
+
+
     }
 
     public void SetPosition(Vector3 _position)
@@ -75,6 +120,18 @@ public class Floor
 
         //Right Rope
         rightRope.ForceNewPosition(new Vector3(0.55f, _position.y, _position.z));
+
+        if(leftCoin != null)
+        {
+            //Left Coin
+            leftCoin.transform.position = (new Vector3(-0.55f, _position.y, _position.z));
+        }
+
+        if(rightCoin != null)
+        {
+            //Right Coin
+            rightCoin.transform.position = (new Vector3(0.55f, _position.y, _position.z));
+        }
     }
 
     public void Row(Vector3 _target)
@@ -87,6 +144,18 @@ public class Floor
 
         //Right Rope
         rightRope.Row(new Vector3(0.55f, _target.y, _target.z));
+
+        if(leftCoin != null)
+        {
+            //Left Coin
+            leftCoin.Row(new Vector3(-0.55f, _target.y, _target.z));
+        }
+
+        if(rightCoin != null)
+        {
+            //Right Coin
+            rightCoin.Row(new Vector3(0.55f, _target.y, _target.z));
+        }
     }
 	
     public bool IsRowing()
@@ -116,26 +185,51 @@ public class Floor
     {
         this.rightRope = RopeFactory.GetStrongRope();
     }
+    private void SetRightCoin()
+    {
+        this.rightCoin = CoinFactory.GetCoin();
+    }
+    private void SetLeftCoin()
+    {
+        this.leftCoin = CoinFactory.GetCoin();
+    }
 
     public void ResetContent()
     {
         //Here is where you will reset the content of the floor
         myBlock.GetSpriteRenderer().sprite = BlockSpriteFactory.GetRandomSprite();
 
-        //Get the next Left Rope
-        //Return our current rope
+        //Return our current left rope
         RopeFactory.ReturnRope(this.leftRope);
-        //Return our current rope
+        //Return our current right rope
         RopeFactory.ReturnRope(this.rightRope);
+
+        //Return our current left coin
+        CoinFactory.ReturnCoin(this.leftCoin);
+        //Return our current right coin
+        CoinFactory.ReturnCoin(this.rightCoin);
 
         //Set our ropes
         RopeGenerator.SetFloorRopes(out this.leftRope, out this.rightRope);
+        //this guy is the one with troubles...
+        CoinGenerator.SetCoins(this.leftRope.GetRopeType(), this.rightRope.GetRopeType(), out this.leftCoin, out this.rightCoin);
 
         //Set the position
-        this.leftRope.ForceNewPosition(new Vector3(-0.55f, (GameRules.GetMaxBlocks() * BuildingBlock.BlockHeight) - BuildingBlock.BlockHeight, 0.0f));
+        this.leftRope.ForceNewPosition(new Vector3(-0.55f, (GameRules.GetMaxBlocks() * BuildingBlock.BlockHeight) - (BuildingBlock.BlockHeight * 2), 0.0f));
         //Set the position
-        this.rightRope.ForceNewPosition(new Vector3(0.55f, (GameRules.GetMaxBlocks() * BuildingBlock.BlockHeight) - BuildingBlock.BlockHeight, 0.0f));
+        this.rightRope.ForceNewPosition(new Vector3(0.55f, (GameRules.GetMaxBlocks() * BuildingBlock.BlockHeight) - (BuildingBlock.BlockHeight * 2), 0.0f));
 
+        if(leftCoin != null)
+        {
+            //Set the position
+            this.leftCoin.ForceNewPosition(new Vector3(-0.55f, (GameRules.GetMaxBlocks() * BuildingBlock.BlockHeight) - (BuildingBlock.BlockHeight * 2), 0.0f));
+        }
+
+        if(rightCoin != null)
+        {
+            //Set the position
+            this.rightCoin.ForceNewPosition(new Vector3(0.55f, (GameRules.GetMaxBlocks() * BuildingBlock.BlockHeight) - (BuildingBlock.BlockHeight * 2), 0.0f));
+        }
     }
 
 }

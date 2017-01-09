@@ -15,6 +15,7 @@ public class Kickstarter : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        GameStateMachine.Execute();
         //Update the EventManager
         EventManager.Tick(Time.deltaTime);
 	}

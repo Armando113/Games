@@ -23,46 +23,34 @@ public class PlayerInput : MonoBehaviour
             //Touch controls
             if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                //Shout Row!!! o.o
-                FloorManager.RowFloor();
-
-                //Move the ropper in the desired direction
-                if (Input.mousePosition.x > (Screen.width / 2.0f))
-                {
-                    PlayerFSM.MoveToRight();
-                }
-                else
-                {
-                    PlayerFSM.MoveToLeft();
-                }
-
-                ScoreManager.AddPoint();
+                //Call the PlayerFSM OnTap
+                PlayerFSM.OnTap(Input.GetTouch(0));
             }
+
+            
 //#else
             //Debug controls
             //Mouse down
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                //Shout Row!!! o.o
-                FloorManager.RowFloor();
-
-                //Move the ropper in the desired direction
-                if (Input.mousePosition.x > (Screen.width / 2.0f))
-                {
-                    PlayerFSM.MoveToRight();
-                }
-                else
-                {
-                    PlayerFSM.MoveToLeft();
-                }
-
-                ScoreManager.AddPoint();
+                //Call PlayerFSM Ontap
+                PlayerFSM.OnTap(KeyCode.Mouse0);
             }
 
 //#endif
             GlobalTime += Time.deltaTime;
             //Drain the player's energy
-			PlayerFSM.DrainEnergy(Time.fixedDeltaTime+(float)(GlobalTime*0.000077));
+            if(PlayerFSM.GetCurrentCtrlMode().GetCtrlType() == CtrlType.GAME)
+            {
+                GameCtrl tCtrl = (GameCtrl)PlayerFSM.GetCurrentCtrlMode();
+                tCtrl.GetRopperGuy().DrainEnergy(Time.fixedDeltaTime + (float)(GlobalTime * 0.00077f));
+            }
+			//PlayerFSM.DrainEnergy(Time.fixedDeltaTime+(float)(GlobalTime*0.000077));
         }
-	}
+        if (!GameStateMachine.CanPlay())
+        {
+            GlobalTime = 0.0f;
+        }
+
+    }
 }

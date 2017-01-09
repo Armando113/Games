@@ -26,6 +26,7 @@ public class ScoreManager
         return pInstance;
     }
 
+    
     public static void AddPoint()
     {
         GetInstance().currentScore += 1;
@@ -67,8 +68,14 @@ public class ScoreManager
 	
     public static void ShowScores()
     {
-        GOScreenController.GetScoreText().text = GetInstance().currentScore.ToString();
+        if(GOScreenController.GetScoreText() != null)
+        {
+            GOScreenController.GetScoreText().text = GetInstance().currentScore.ToString();
+        }
 
-        GOScreenController.GetBestText().text = GetInstance().highScore.ToString();
+        if(GOScreenController.GetBestText() != null)
+        {
+            GOScreenController.GetBestText().text = GetInstance().highScore.ToString();
+        }
     }
 }

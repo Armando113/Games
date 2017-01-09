@@ -8,9 +8,33 @@ public class RopperNode : ManagerNode
     {
 
     }
+    public static RopperNode i;
 
-	// Use this for initialization
-	void Start ()
+    void Awake()
+    {
+        if (i == null)
+        {
+            i = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    // Use this for initialization
+    void Start ()
+    {
+        createRoppertree();
+        
+    }
+	
+	// Update is called once per frame
+	void Update ()
+    {
+       
+	}
+    void createRoppertree()
     {
         //Create the Ropper Tree
         GameObject tObj = (GameObject)MonoBehaviour.Instantiate(Resources.Load("Prefabs/Ropper/RopperTree"), new Vector3(), new Quaternion());
@@ -20,12 +44,5 @@ public class RopperNode : ManagerNode
         RopperTree tTree = tObj.GetComponent<RopperTree>();
         //Set it as our tree
         myTree = tTree;
-        
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
 }

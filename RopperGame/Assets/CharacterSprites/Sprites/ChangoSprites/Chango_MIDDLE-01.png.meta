@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 419e2ed338db85f4f9553eb9a0080c58
+timeCreated: 1478112987
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Chango_MIDDLE-01_0
+    21300002: Chango_MIDDLE-01_1
+    21300004: Chango_MIDDLE-01_2
+    21300006: Chango_MIDDLE-01_3
+    21300008: Chango_MIDDLE-01_4
+    21300010: Chango_MIDDLE-01_5
+    21300012: Chango_MIDDLE-01_6
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Chango_MIDDLE-01_0
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 9
+        width: 347
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Chango_MIDDLE-01_1
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 6
+        width: 341
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Chango_MIDDLE-01_2
+      rect:
+        serializedVersion: 2
+        x: 1021
+        y: 8
+        width: 342
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Chango_MIDDLE-01_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 9
+        width: 343
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Chango_MIDDLE-01_4
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 6
+        width: 341
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Chango_MIDDLE-01_5
+      rect:
+        serializedVersion: 2
+        x: 2535
+        y: 8
+        width: 340
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Chango_MIDDLE-01_6
+      rect:
+        serializedVersion: 2
+        x: 3021
+        y: 9
+        width: 347
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

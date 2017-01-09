@@ -10,12 +10,18 @@ public class RopperGuy : TreeLeaf
 
     private RopperAnimator myAnim;
 
+    private int mCoinsCollected;
+
+    private bool bIsFalling;
+
     //Threshold
     private float threshold;
 
     public RopperGuy() : base(GameObjectType.PLAYER)
     {
         threshold = 0.1f;
+        bIsFalling = false;
+        mCoinsCollected = 0;
     }
 
     // Use this for initialization
@@ -31,7 +37,10 @@ public class RopperGuy : TreeLeaf
 	// Update is called once per frame
 	void Update ()
     {
-	    
+	    if(myEnergy.GetCurrentEnergy() <= 0.0f)
+        {
+            bIsFalling = true;
+        }
 	}
 
     void FixedUpdate()
@@ -63,19 +72,37 @@ public class RopperGuy : TreeLeaf
         }
     }
 
+    public bool IsFalling()
+    {
+        return bIsFalling;
+    }
+    public void SetFallen(bool _bool)
+    {
+        bIsFalling = _bool;
+    }
+
     public void DrainEnergy(float _amount)
     {
-        myEnergy.DrainEnergy(_amount);
+        if(myEnergy != null)
+        {
+            myEnergy.DrainEnergy(_amount);
+        }
     }
 
     public void AddEnergy(float _amount)
     {
-        myEnergy.RecoverEnergy(_amount);
+        if(myEnergy != null)
+        {
+            myEnergy.RecoverEnergy(_amount);
+        }
     }
 
     public void ResetEnergy()
     {
-        myEnergy.ResetEnergy();
+        if(myEnergy != null)
+        {
+            myEnergy.ResetEnergy();
+        }
     }
 
     public void Animate(int _index)
@@ -95,6 +122,14 @@ public class RopperGuy : TreeLeaf
         myAnim.Animate(_myanimName);
     }
 
+    public void CollectCoin(bool _coin)
+    {
+        if(_coin)
+        {
+            mCoinsCollected += 1;
+            Debug.Log(mCoinsCollected.ToString());
+        }
+    }
 
     public override void Activate()
     {

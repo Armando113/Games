@@ -16,18 +16,15 @@ public class GameScreen : ScreenState
 
     public override void Enter()
     {
-		
-
         //Initialize the Game assets
         //Create the floors
         FloorManager.CreateFloors();
-
 
         //UI
         UIManager.SwitchToGame();
 
         //Reset the Ropper
-        PlayerFSM.ResetRopper();
+        PlayerFSM.SetGameCtrl();
 
         //Reset Score
         ScoreManager.ResetScore();
@@ -55,8 +52,5 @@ public class GameScreen : ScreenState
 
         //Record new Score
         ScoreManager.RecordNewScore();
-
-        //Deactivate the ropper
-        PlayerFSM.DeactivateRopper();
     }
 }

@@ -8,9 +8,22 @@ public class BlockNode : ManagerNode
     {
 
     }
+    public static BlockNode i;
 
-	// Use this for initialization
-	void Start ()
+    void Awake()
+    {
+        if (i == null)
+        {
+            i = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    // Use this for initialization
+    void Start ()
     {
         //Create my Tree
         GameObject tObj = (GameObject)MonoBehaviour.Instantiate(Resources.Load("Prefabs/BuildingBlock/BlockTree"), new Vector3(), new Quaternion());

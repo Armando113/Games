@@ -29,7 +29,7 @@ public class LRRopeLane : RopeLane
             guy.GetComponentInChildren<Animator>().Play("Middle");
         }
         
-        guy.AddEnergy(GameRules.GetHighEnergy());
+       // guy.AddEnergy(GameRules.GetHighEnergy());
 
         //Check for weak ropes
         if (FloorManager.GetLeftRopeOnFloor(5) == RopeEnum.WEAK || FloorManager.GetRightRopeOnFloor(5) == RopeEnum.WEAK)

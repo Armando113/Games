@@ -13,8 +13,11 @@ public class RefillEnergyCommand : ICommand
     public override void Execute()
     {
         //Get the energy bar
-        RopperTree tTree = (RopperTree)GameObjectManager.GetTree(GameObjectType.PLAYER);
-        //reset Energy
-        tTree.GetRopperGuy().ResetEnergy();
+        if(PlayerFSM.GetCurrentCtrlMode().GetCtrlType() == CtrlType.GAME)
+        {
+            GameCtrl tCtrl = (GameCtrl)PlayerFSM.GetCurrentCtrlMode();
+
+            tCtrl.GetRopperGuy().ResetEnergy();
+        }
     }
 }

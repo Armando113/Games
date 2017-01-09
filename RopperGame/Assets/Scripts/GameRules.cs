@@ -7,6 +7,7 @@ public class GameRules
     private static GameRules pInstance;
 	private int maxBlocks;
 	private int maxRopes;
+    private int maxCoins;
     //"Global Brick" Rules
     private Vector3 deathPos;
     private Vector3 B_resetPos;
@@ -46,12 +47,14 @@ public class GameRules
         maxBlocks = 7;
 		//Maximum number of ropes in each line.
 		maxRopes = maxBlocks * 2;
-		//The speed for all objects in scene
-		globalSpeed = 0.5f;
+        //Maximum number of Coins in each line
+        maxCoins = 1;
+        //The speed for all objects in scene
+        globalSpeed = 0.5f;
 
-        lowEnergy = 0.5f;
+        lowEnergy = 0.4f;
 
-        highEnergy = 1.5f;
+
     }
 
     private static GameRules GetInstance()
@@ -105,7 +108,12 @@ public class GameRules
 	{
 		return GetInstance ().maxRopes;
 	}
-	public static float GetGlobalSpeed()
+    public static int GetMaxCoins()
+    {
+        return GetInstance().maxCoins;
+    }
+
+    public static float GetGlobalSpeed()
 	{
 		return GetInstance ().globalSpeed;
 	}
@@ -115,8 +123,5 @@ public class GameRules
         return GetInstance().lowEnergy;
     }
 
-    public static float GetHighEnergy()
-    {
-        return GetInstance().highEnergy;
-    }
+
 }

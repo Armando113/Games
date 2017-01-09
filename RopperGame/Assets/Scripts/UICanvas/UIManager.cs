@@ -50,7 +50,7 @@ public class UIManager
     public static void SwitchToMenu()
     {
         SwitchUIOff();
-
+      
         menu.gameObject.SetActive(true);
     }
 	public static void SwitchToIntro()
