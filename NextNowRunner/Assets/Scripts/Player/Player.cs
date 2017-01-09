@@ -21,7 +21,7 @@ public class Player : SceneObject
     {
         fSpeed = 15.0f;
         fJumpForce = 0.0f;
-        health = 3;
+        health = 2;
     }
 
     // Use this for initialization
@@ -89,6 +89,7 @@ public class Player : SceneObject
                 if(health > 0)
                 {
                     health--;
+                    ScoreManager.LoseHealth();
                 }
                 else
                 {
@@ -138,6 +139,7 @@ public class Player : SceneObject
         {
             tCoin.gameObject.SetActive(false);
             //Collect points here
+            ScoreManager.AddPoint();
         }
     }
 
@@ -148,7 +150,7 @@ public class Player : SceneObject
 
     public override void ActivateObject()
     {
-        health = 3;
+        health = 2;
         this.transform.position = new Vector3(0.0f, 2.5f, 0.0f);
     }
 

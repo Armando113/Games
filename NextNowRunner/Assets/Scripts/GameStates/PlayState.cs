@@ -30,5 +30,7 @@ public class PlayState : GameState
         GameObjectManager.Deactivate();
         //UIManager
         UIManager.SwitchToIntro();
+        //Reset scores
+        ScoreManager.Reset();
     }
 }

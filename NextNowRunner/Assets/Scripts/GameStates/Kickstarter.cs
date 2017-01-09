@@ -13,6 +13,9 @@ public class Kickstarter : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	
+        if(GSM.CanPlay())
+        {
+            ScoreManager.ShowScoreUI();
+        }
 	}
 }
